@@ -23,14 +23,14 @@ plot.params <- eventReactive(input$inicio, {
 
 output$plot_output <- renderPlot({
   
-  req(resp())
+  req(resp.1())
   
   # waiter en pantalla
   waiter::Waiter$new(html = spin_square_circle(), id = "plot_output")$show()
   
   par(mar = c(9, 4, 4, 2) + 0.1)
   
-  plot(1:(length(resp())-2), resp()[3:length(resp())],
+  plot(1:(length(resp.1())-2), resp.1()[3:length(resp.1())],
        type = "b", col = "red", xaxt = "n",
        xlab = "", ylab = var.1())
   

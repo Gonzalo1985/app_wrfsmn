@@ -147,12 +147,18 @@ draw.map <- function(x = x, y = y){
   
   mapa <- leaflet(data = NULL, width = 1300, height = 1600, options = leafletOptions(preferCanvas = TRUE)) %>%
     
+    addTiles(urlTemplate = "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png",
+             attribution = "Servicio Meteorológico Nacional", group = "Argenmap IGN") %>%
+    
+    addTiles(urlTemplate = "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_topo@EPSG%3A3857@png/{z}/{x}/{-y}.png",
+             attribution = "Servicio Meteorológico Nacional", group = "Argenmap Topo IGN") %>%
+    
     addTiles(urlTemplate = "//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
              attribution = "Servicio Meteorológico Nacional", group = "OSM (default)") %>%
   
     addCircles(data = df, weight = 5, group = "Punto de interés") %>%
     
-    addLayersControl(baseGroups = c("OSM (default)"), 
+    addLayersControl(baseGroups = c("Argenmap IGN", "Argenmap Topo IGN", "OSM (default)"), 
                      overlayGroups = c("Punto de interés"), 
                      options = layersControlOptions(collapsed = FALSE)) %>%
   
